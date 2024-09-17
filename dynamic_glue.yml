@@ -1,0 +1,27 @@
+Glue_Job_params:
+  Name: "lake_tran"
+  Description: configuring glue job
+  Role: "arn:aws:iam::123456789012:role/MyGlueServiceRole"
+  Command:
+    Name: Glueetl
+    ScriptLocation: d 
+    Python: 3
+  MaxCapacity: 2  # This defines the number of DPUs
+  WorkerType: Standard  # Options: "Standard", "G.1X", "G.2X"
+  NumberOfWorkers: 2  # Number of workers
+  GlueVersion: "3.0"
+  Timeout: 2880  # Timeout in minutes
+  SecurityConfiguration: "my-security-configuration"
+  Arguments:
+    --JOB_NAME: "my-glue-job"
+  ExecutionProperty:
+    MaxConcurrentRuns: 1
+  DefaultArguments:
+    --glue_job_input_json: s3://
+    --config: 
+  MaxRetries: 0
+  Timeout: 120
+Tags:
+  Project: "data-processing"
+  Owner: "team-delta"
+  Environment: "prod"
